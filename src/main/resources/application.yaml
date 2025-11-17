@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: objectives-management-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/example
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  # 1. data class が配置されているパッケージを指定
+  #    これにより、XMLで "User" のような短いエイリアスが使用可能になる
+  type-aliases-package: com.example.domain.dto, com.example.domain.model
+
+  # 2. XMLマッパーファイルの場所を指定
+  #    resources/mappers フォルダ配下の全XMLファイルを再帰的に検索
+  mapper-locations: classpath:mappers/**/*.xml
+
+  # 3. MyBatisのコア設定
+  configuration:
+    # 必須: DBのsnake_case (user_id) を KotlinのcamelCase (userId) に自動変換
+    map-underscore-to-camel-case: true
+
+    # オプション: グローバルなフェッチサイズとタイムアウト
+    default-fetch-size: 100
+    default-statement-timeout: 30
